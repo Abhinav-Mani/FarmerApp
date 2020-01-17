@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">FarmerApp</string>
+    <string-array name="contactMode">
+        <item>Call &amp; Bidding</item>
+        <item>Call</item>
+        <item>Bidding</item>
+    </string-array>
+</resources>

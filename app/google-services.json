@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "714933062509",
+    "firebase_url": "https://farmerportal-bc201.firebaseio.com",
+    "project_id": "farmerportal-bc201",
+    "storage_bucket": "farmerportal-bc201.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:714933062509:android:fe966fc5fe4ddc8474e864",
+        "android_client_info": {
+          "package_name": "com.androlord.farmerapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "714933062509-icrbnhgg9lcvpat4q0s5lop9mvqjtpm8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.androlord.farmerapp",
+            "certificate_hash": "c330a061edb8dad1bfc6f21b2a1a4913d6baf257"
+          }
+        },
+        {
+          "client_id": "714933062509-rjp0i37f5gg1dlliefmtuaujetegkm3v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_1abRDXpsMsWMBb_wpQUQYqCiP4QCxiI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "714933062509-rjp0i37f5gg1dlliefmtuaujetegkm3v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
