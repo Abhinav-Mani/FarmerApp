@@ -2,7 +2,6 @@ package com.androlord.farmerapp.Activities;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -18,9 +17,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.Switch;
 import android.widget.Toast;
-
 import com.androlord.farmerapp.Models.Products;
 import com.androlord.farmerapp.R;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -30,9 +27,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-
 import java.io.ByteArrayOutputStream;
-import java.lang.reflect.Array;
 
 public class AddProduct extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
     EditText product,price,quantity,DeliveryCharge;
