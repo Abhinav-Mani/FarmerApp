@@ -5,39 +5,66 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/GreenOrganicFarmLogo"
     tools:context=".Activities.LoginActivity">
-    <EditText
-        android:id="@+id/name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Name" />
-    <EditText
-        android:id="@+id/address"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Address" />
 
-    <EditText
-        android:id="@+id/phoneno"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Phone No" />
+   <androidx.cardview.widget.CardView
+       android:layout_marginTop="300dp"
+       android:layout_marginEnd="30dp"
+       android:layout_marginStart="30dp"
+       android:elevation="20dp"
+       app:cardCornerRadius="10dp"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content">
 
-    <Button
-        android:id="@+id/loginsubmit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="LOGIN" />
+       <RelativeLayout
+           android:layout_margin="10dp"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent">
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/verficatioCode"
-        android:hint="VerificationCode"
-        />
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Verify"
-        android:id="@+id/verify"/>
+           <EditText
+               android:id="@+id/name"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:hint="Name" />
+           <EditText
+               android:layout_below="@+id/name"
+               android:id="@+id/address"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:hint="Address" />
+
+           <EditText
+               android:layout_below="@+id/address"
+               android:id="@+id/phoneno"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:hint="Phone No" />
+
+           <Button
+               android:layout_below="@+id/phoneno"
+               android:id="@+id/loginsubmit"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:text="LOGIN" />
+
+           <EditText
+               android:layout_below="@+id/loginsubmit"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:id="@+id/verficatioCode"
+               android:hint="VerificationCode"
+               />
+           <Button
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:text="Verify"
+               android:layout_below="@+id/verficatioCode"
+               android:id="@+id/verify"/>
+
+       </RelativeLayout>
+
+   </androidx.cardview.widget.CardView>
+
+
 </RelativeLayout>
