@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/orderItem"
+    android:padding="10dp">
+    <TextView
+        android:layout_width="match_parent"
+        android:id="@+id/quantity"
+        android:text="Qunatity"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:id="@+id/productPay"
+        android:text="Product Pay"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:id="@+id/deliverPay"
+        android:text="Delivery Pay"
+        android:layout_height="wrap_content"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="3">
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Call"
+            android:layout_weight="1"
+            android:padding="5dp"
+            android:id="@+id/callCustomer"/>
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Accept"
+            android:padding="5dp"
+            android:layout_weight="1"
+            android:id="@+id/acceptCustomer"/>
+        <Button
+            android:layout_width="0dp"
+            android:padding="5dp"
+            android:layout_height="wrap_content"
+            android:text="Decline"
+            android:layout_weight="1"
+            android:id="@+id/declineCustomer"/>
+    </LinearLayout>
+
+</LinearLayout>

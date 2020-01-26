@@ -9,8 +9,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.androlord.farmerapp.MainActivity;
 import com.androlord.farmerapp.Models.Products;
 import com.androlord.farmerapp.R;
 import com.bumptech.glide.Glide;
@@ -21,10 +23,15 @@ import java.util.ArrayList;
 public class FarmersListAdapter extends RecyclerView.Adapter<FarmersListAdapter.MyViewHolder>{
     ArrayList<Products> list;
     Context context;
+    ClickHandler handler;
 
-    public FarmersListAdapter(ArrayList<Products> list, Context context) {
+    public static interface ClickHandler{
+        public void ItemSelected(int position);
+    }
+    public FarmersListAdapter(ArrayList<Products> list, MainActivity activity) {
         this.list = list;
-        this.context = context;
+        this.context = activity.getBaseContext();
+        this.handler=activity;
     }
 
     @NonNull
@@ -36,7 +43,7 @@ public class FarmersListAdapter extends RecyclerView.Adapter<FarmersListAdapter.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
         holder.textView.setText(list.get(position).getProductName());
         Glide.with(context).asBitmap().
                 load(list.get(position).getImg()).
@@ -45,6 +52,12 @@ public class FarmersListAdapter extends RecyclerView.Adapter<FarmersListAdapter.
                 fallback(R.drawable.vegi).
                 placeholder(R.drawable.vegi).
                 diskCacheStrategy(DiskCacheStrategy.RESOURCE).into(holder.imageView);
+        holder.item.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                handler.ItemSelected(position);
+            }
+        });
     }
 
     @Override
@@ -54,12 +67,14 @@ public class FarmersListAdapter extends RecyclerView.Adapter<FarmersListAdapter.
     }
 
     public static class  MyViewHolder extends RecyclerView.ViewHolder {
+        CardView item;
         ImageView imageView;
         TextView textView;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView=itemView.findViewById(R.id.productImageSingle);
             textView=itemView.findViewById(R.id.productNameSingle);
+            item=itemView.findViewById(R.id.SingleItem);
         }
     }
 }

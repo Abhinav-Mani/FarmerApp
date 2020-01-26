@@ -9,9 +9,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.androlord.farmerapp.Activities.AddProduct;
 import com.androlord.farmerapp.Activities.LoginActivity;
+import com.androlord.farmerapp.Activities.OrderList;
 import com.androlord.farmerapp.Adapter.FarmersListAdapter;
 import com.androlord.farmerapp.Models.Farmer;
 import com.androlord.farmerapp.Models.Products;
@@ -26,7 +28,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements FarmersListAdapter.ClickHandler {
     FirebaseAuth mAuth;
     FirebaseDatabase database;
     DatabaseReference reference;
@@ -44,7 +46,9 @@ public class MainActivity extends AppCompatActivity {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 if(firebaseAuth.getCurrentUser()==null)
                 {
-                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                    Intent intent=new Intent(MainActivity.this, LoginActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
                 }
             }
         });
@@ -55,7 +59,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         init();
-        fetch();
+        try {
+            fetch();
+        }catch (Exception e){
+            Log.e("Error", "onCreate: "+e.getMessage());
+        }
+
     }
 
     private void fetch() {
@@ -67,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
                     Products products=(Products) dataSnapshot1.getValue(Products.class);
                     products.setKey(dataSnapshot1.getKey());
                     Log.d("ak47", "onDataChange: "+products.getKey());
-                    if(products.getPhoneNo().equalsIgnoreCase(mAuth.getCurrentUser().getPhoneNumber())) {
+                    if(mAuth.getCurrentUser()!=null&&products.getPhoneNo().equalsIgnoreCase(mAuth.getCurrentUser().getPhoneNumber())) {
                         list.add(products);
                         Log.d("ak47", "onDataChange: ");
                     }
@@ -110,5 +119,13 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
+    }
+
+    @Override
+    public void ItemSelected(int position) {
+        Intent intent=new Intent(this, OrderList.class);
+        intent.putExtra("id",list.get(position).getKey());
+        startActivity(intent);
+        //Toast.makeText(this,list.get(position).getKey()+" ",Toast.LENGTH_LONG).show();
     }
 }
