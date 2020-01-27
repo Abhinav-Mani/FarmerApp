@@ -73,7 +73,7 @@ public class FarmersListAdapter extends RecyclerView.Adapter<FarmersListAdapter.
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView=itemView.findViewById(R.id.productImageSingle);
-            textView=itemView.findViewById(R.id.productNameSingle);
+            textView=itemView.findViewById(R.id.product_name);
             item=itemView.findViewById(R.id.SingleItem);
         }
     }

@@ -21,16 +21,18 @@ public class AppLocationService extends Service implements LocationListener {
 
     private static final long MIN_DISTANCE_FOR_UPDATE = 10;
     private static final long MIN_TIME_FOR_UPDATE = 1000 * 60 * 2;
+    Context context;
 
     public AppLocationService(Context context) {
         locationManager = (LocationManager) context
                 .getSystemService(LOCATION_SERVICE);
+        this.context=context;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     public Location getLocation(String provider) {
         if (locationManager.isProviderEnabled(provider)) {
-            if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            if (context.checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && context.checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 // TODO: Consider calling
                 //    Activity#requestPermissions
                 // here to request the missing permissions, and then overriding
