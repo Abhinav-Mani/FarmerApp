@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         //double latitude = 37.422005;
         //double longitude = -122.084095
 
-        if (location != null) {
+   /*     if (location != null) {
             double latitude = location.getLatitude();
             double longitude = location.getLongitude();
             LocationAddress locationAddress = new LocationAddress();
@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
                     getApplicationContext(), new GeocoderHandler());
         } else {
             showSettingsAlert();
-        }
+        }*/
 
     }
     public void showSettingsAlert() {
