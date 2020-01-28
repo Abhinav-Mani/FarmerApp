@@ -5,6 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@drawable/farmerappbackground"
     android:layout_height="match_parent">
 
     <RelativeLayout
@@ -32,96 +33,115 @@
                 />
 
         </androidx.cardview.widget.CardView>
-
-        <Spinner
+        <androidx.cardview.widget.CardView
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="20dp"
+            android:elevation="15dp"
+            app:cardCornerRadius="15dp"
             android:layout_below="@+id/card_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:entries="@array/Products"
-            android:id="@+id/productName"
-            android:layout_marginTop="9dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"/>
-        <EditText
-            android:layout_marginTop="9dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_below="@+id/productName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Price"
-            android:inputType="numberDecimal"
-            android:id="@+id/productPrice" />
-        <EditText
-            android:layout_below="@+id/productPrice"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Quantity"
-            android:inputType="number"
-            android:layout_marginTop="9dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:id="@+id/productQuantity" />
+            android:layout_height="match_parent">
 
-        <LinearLayout
-            android:id="@+id/linear_layout"
-            android:layout_below="@+id/productQuantity"
-            android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:layout_height="wrap_content">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-            <TextView
-                android:layout_marginTop="9dp"
-                android:id="@+id/self_delivery_text"
-                android:text="Want the prodcut to be self delivered?"
-                android:layout_width="wrap_content"
-                android:textColor="#1A1818"
-                android:textStyle="bold"
-                android:textSize="15sp"
-                android:layout_marginStart="10dp"
-                android:layout_height="wrap_content"/>
-            <CheckBox
-                android:layout_marginTop="9dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Self Delivery"
-                android:id="@+id/selfDeliveryCheck"/>
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:entries="@array/Products"
+                    android:id="@+id/productName"
+                    android:layout_marginTop="9dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"/>
+                <EditText
+                    android:layout_marginTop="9dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_below="@+id/productName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Price"
+                    android:inputType="numberDecimal"
+                    android:id="@+id/productPrice" />
+                <EditText
+                    android:layout_below="@+id/productPrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Quantity"
+                    android:inputType="number"
+                    android:layout_marginTop="9dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:id="@+id/productQuantity" />
 
-        </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/linear_layout"
+                    android:layout_below="@+id/productQuantity"
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content">
 
-        <EditText
-            android:layout_marginTop="9dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_below="@+id/linear_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Service Charge"
-            android:id="@+id/productDeliveryCharge"/>
-        <Spinner
-            android:layout_below="@+id/productDeliveryCharge"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:entries="@array/contactMode"
-            android:id="@+id/contactMode"
-            android:layout_marginTop="9dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"/>
-        <Button
-            android:layout_marginTop="20dp"
-            android:background="@drawable/round_bg_grey"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_width="240dp"
-            android:layout_centerHorizontal="true"
-            android:layout_height="wrap_content"
-            android:id="@+id/submit"
-            android:text="SUBMIT"
-            android:textStyle="bold"
-            android:textColor="#000000"
-            android:layout_below="@+id/contactMode"/>
+                    <TextView
+                        android:layout_marginTop="9dp"
+                        android:id="@+id/self_delivery_text"
+                        android:text="Want the prodcut to be self delivered?"
+                        android:layout_width="wrap_content"
+                        android:textColor="#1A1818"
+                        android:textStyle="bold"
+                        android:textSize="15sp"
+                        android:layout_marginStart="10dp"
+                        android:layout_height="wrap_content"/>
+                    <CheckBox
+                        android:layout_marginTop="9dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Self Delivery"
+                        android:id="@+id/selfDeliveryCheck"/>
+
+                </LinearLayout>
+
+                <EditText
+                    android:layout_marginTop="9dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_below="@+id/linear_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Service Charge"
+                    android:id="@+id/productDeliveryCharge"/>
+                <Spinner
+                    android:layout_below="@+id/productDeliveryCharge"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/contactMode"
+                    android:id="@+id/contactMode"
+                    android:layout_marginTop="9dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"/>
+                <Button
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/round_bg_grey"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_width="240dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/submit"
+                    android:text="SUBMIT"
+                    android:textStyle="bold"
+                    android:textColor="#000000"
+                    android:layout_below="@+id/contactMode"/>
+
+            </RelativeLayout>
+
+
+
+        </androidx.cardview.widget.CardView>
+
     </RelativeLayout>
 
 </ScrollView>
