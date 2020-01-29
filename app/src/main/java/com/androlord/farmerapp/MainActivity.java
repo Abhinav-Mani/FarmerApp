@@ -184,7 +184,7 @@ public class MainActivity extends AppCompatActivity implements FarmersListAdapte
     @Override
     public void ItemSelected(int position, ImageView imageView) {
         Intent intent=new Intent(this, OrderList.class);
-        intent.putExtra("id",list.get(position).getKey());
+        intent.putExtra("item",list.get(position));
         ActivityOptionsCompat options=ActivityOptionsCompat.makeSceneTransitionAnimation(this,imageView, ViewCompat.getTransitionName(imageView));
         startActivity(intent, options.toBundle());
         //Toast.makeText(this,list.get(position).getKey()+" ",Toast.LENGTH_LONG).show();

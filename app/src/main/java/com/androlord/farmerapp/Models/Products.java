@@ -2,7 +2,9 @@ package com.androlord.farmerapp.Models;
 
 import android.widget.ImageView;
 
-public class Products {
+import java.io.Serializable;
+
+public class Products implements Serializable {
     String ProductName;
     String Price;
     String Location;
