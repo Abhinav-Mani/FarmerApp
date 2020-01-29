@@ -45,14 +45,7 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_product);
         init();
-        if(isSelfDelivery.isChecked())
-        {
-            DeliveryCharge.setVisibility(View.VISIBLE);
-        }
-        else
-        {
-            DeliveryCharge.setVisibility(View.GONE);
-        }
+
         setListners();
     }
 
@@ -87,6 +80,14 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
         submit=findViewById(R.id.submit);
         imageView=findViewById(R.id.imageofproduct);
         mStorageRef = FirebaseStorage.getInstance().getReference();
+        if(isSelfDelivery.isChecked())
+        {
+            DeliveryCharge.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            DeliveryCharge.setVisibility(View.GONE);
+        }
         mref= FirebaseDatabase.getInstance().getReference().child("Products");
     }
     public void push(Products p)
