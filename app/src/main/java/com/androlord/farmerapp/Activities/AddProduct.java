@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 import com.androlord.farmerapp.Models.Products;
 import com.androlord.farmerapp.R;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.chip.ChipGroup;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -50,6 +52,19 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
     }
 
     private void setListners() {
+        isSelfDelivery.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                if(isSelfDelivery.isChecked()){
+                    DeliveryCharge.setVisibility(View.VISIBLE);
+                }
+                else
+                {
+                    DeliveryCharge.setVisibility(View.GONE);
+                }
+            }
+        });
         imageView.setOnClickListener(this);
         submit.setOnClickListener(this);
         mode.setOnItemSelectedListener(this);
@@ -80,14 +95,6 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
         submit=findViewById(R.id.submit);
         imageView=findViewById(R.id.imageofproduct);
         mStorageRef = FirebaseStorage.getInstance().getReference();
-        if(isSelfDelivery.isChecked())
-        {
-            DeliveryCharge.setVisibility(View.VISIBLE);
-        }
-        else
-        {
-            DeliveryCharge.setVisibility(View.GONE);
-        }
         mref= FirebaseDatabase.getInstance().getReference().child("Products");
     }
     public void push(Products p)
