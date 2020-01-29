@@ -30,9 +30,9 @@ import com.google.firebase.storage.UploadTask;
 import java.io.ByteArrayOutputStream;
 
 public class AddProduct extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
-    EditText product,price,quantity,DeliveryCharge;
+    EditText price,quantity,DeliveryCharge;
     CheckBox isSelfDelivery;
-    Spinner mode;
+    Spinner mode,product;
     Button submit;
     ImageView imageView;
     int clickedImage=0;
@@ -45,6 +45,14 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_product);
         init();
+        if(isSelfDelivery.isChecked())
+        {
+            DeliveryCharge.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            DeliveryCharge.setVisibility(View.GONE);
+        }
         setListners();
     }
 
@@ -104,11 +112,7 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
 
     private boolean validate() {
         boolean val=true;
-        if(TextUtils.isEmpty(product.getText().toString().trim())) {
-            val=false;
-            Toast.makeText(this,"Product Name Cannot be empty",Toast.LENGTH_LONG).show();
 
-        }
         if(TextUtils.isEmpty(price.getText().toString().trim())) {
             val=false;
             Toast.makeText(this,"Price Cannot be empty",Toast.LENGTH_LONG).show();
@@ -128,8 +132,6 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
     }
 
     private void upload() {
-        ProductName=product.getText().toString().trim();
-        Price=product.getText().toString().trim();
         Quantity=quantity.getText().toString().trim();
         if(isSelfDelivery.isChecked())
             deliveyCharge=DeliveryCharge.getText().toString().trim();
@@ -166,6 +168,8 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
+        Price = ProductName;
+        ProductName = getResources().getStringArray(R.array.Products)[i];
         ModeOFContact = getResources().getStringArray(R.array.contactMode)[i];
         Log.d("ak47", "onItemSelected: "+i+" "+ModeOFContact);
 
