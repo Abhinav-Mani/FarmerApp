@@ -1,48 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/farmerappbackground"
     android:layout_height="match_parent"
     tools:context=".Activities.OrderList">
     <RelativeLayout
+        android:id="@+id/relativelayout1"
         android:layout_width="match_parent"
-        android:layout_height="300dp">
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="280dp"
-            android:id="@+id/productImage"
-            android:transitionName="Windows"/>
+        android:layout_height="wrap_content">
+       <androidx.cardview.widget.CardView
+           android:id="@+id/cardview1"
+           android:layout_margin="20dp"
+           android:layout_width="match_parent"
+           android:layout_height="150dp">
+           <ImageView
+               android:layout_width="match_parent"
+               android:layout_height="200dp"
+               android:id="@+id/productImage"
+               android:transitionName="Windows"/>
+       </androidx.cardview.widget.CardView>
         <androidx.cardview.widget.CardView
+            android:layout_below="@+id/cardview1"
             android:layout_width="match_parent"
-            android:layout_alignParentBottom="true"
-            android:layout_marginHorizontal="20dp"
+            android:layout_margin="20dp"
             app:cardCornerRadius="20dp"
+            android:id="@+id/cardview2"
             android:layout_height="wrap_content">
-            <LinearLayout
+            <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_alignParentBottom="true">
             <TextView
+                android:text="Prodct Name"
+                android:layout_margin="5dp"
                 android:layout_width="match_parent"
                 android:id="@+id/ProductName"
                 android:layout_height="wrap_content"/>
             <TextView
                 android:layout_width="match_parent"
                 android:id="@+id/ProductPrice"
+                android:text="Price"
+                android:layout_margin="5dp"
+                android:layout_below="@+id/ProductName"
                 android:layout_height="wrap_content"/>
             <TextView
+                android:text="Amount"
+                android:layout_margin="5dp"
                 android:layout_width="match_parent"
                 android:id="@+id/ProductAmount"
+                android:layout_below="@+id/ProductPrice"
                 android:layout_height="wrap_content"/>
             <LinearLayout
+                android:layout_below="@+id/ProductAmount"
                 android:layout_width="match_parent"
                 android:weightSum="2"
+                android:layout_margin="20dp"
                 android:layout_height="wrap_content">
                 <Button
+                    android:background="@drawable/round_bg_grey"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -50,20 +68,23 @@
                     android:text="REMOVE"/>
                 <Button
                     android:layout_width="0dp"
+                    android:background="@drawable/round_bg_grey"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:id="@+id/editProduct"
                     android:text="EDIT"/>
 
             </LinearLayout>
+        </RelativeLayout>
 
-
-        </LinearLayout>
         </androidx.cardview.widget.CardView>
-    </RelativeLayout>
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/OrderList"/>
 
-</LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_below="@+id/cardview2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/OrderList"/>
+    </RelativeLayout>
+
+
+</RelativeLayout>
