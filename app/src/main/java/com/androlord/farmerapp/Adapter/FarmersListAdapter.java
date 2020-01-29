@@ -26,7 +26,7 @@ public class FarmersListAdapter extends RecyclerView.Adapter<FarmersListAdapter.
     ClickHandler handler;
 
     public static interface ClickHandler{
-        public void ItemSelected(int position);
+        public void ItemSelected(int position, ImageView imageView);
     }
     public FarmersListAdapter(ArrayList<Products> list, MainActivity activity) {
         this.list = list;
@@ -43,7 +43,7 @@ public class FarmersListAdapter extends RecyclerView.Adapter<FarmersListAdapter.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
         holder.textView.setText(list.get(position).getProductName());
         Glide.with(context).asBitmap().
                 load(list.get(position).getImg()).
@@ -55,7 +55,7 @@ public class FarmersListAdapter extends RecyclerView.Adapter<FarmersListAdapter.
         holder.item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                handler.ItemSelected(position);
+                handler.ItemSelected(position, holder.imageView);
             }
         });
     }

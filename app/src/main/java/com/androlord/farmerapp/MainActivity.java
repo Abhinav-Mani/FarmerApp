@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityOptionsCompat;
+import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,6 +21,7 @@ import android.os.Message;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.androlord.farmerapp.Activities.AddProduct;
@@ -179,10 +182,11 @@ public class MainActivity extends AppCompatActivity implements FarmersListAdapte
     }
 
     @Override
-    public void ItemSelected(int position) {
+    public void ItemSelected(int position, ImageView imageView) {
         Intent intent=new Intent(this, OrderList.class);
         intent.putExtra("id",list.get(position).getKey());
-        startActivity(intent);
+        ActivityOptionsCompat options=ActivityOptionsCompat.makeSceneTransitionAnimation(this,imageView, ViewCompat.getTransitionName(imageView));
+        startActivity(intent, options.toBundle());
         //Toast.makeText(this,list.get(position).getKey()+" ",Toast.LENGTH_LONG).show();
     }
 

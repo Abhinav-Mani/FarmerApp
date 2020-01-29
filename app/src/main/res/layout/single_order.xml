@@ -4,6 +4,12 @@
     android:layout_height="wrap_content"
     android:id="@+id/orderItem"
     android:padding="10dp">
+    <ImageView
+        android:transitionName="Windows"
+        android:id="@+id/productImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
     <TextView
         android:layout_width="match_parent"
         android:id="@+id/quantity"
