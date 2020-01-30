@@ -96,6 +96,8 @@ public class OrderList extends AppCompatActivity implements OrderListAdapter.Cli
                         for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren()){
                             OrderRequest orderRequest=(OrderRequest)dataSnapshot1.getValue(OrderRequest.class);
                             orderRequest.setKey(dataSnapshot1.getKey());
+                            orderRequest.setAmount(orderRequest.getAmount().replace("Kg",""));
+                            orderRequest.setAmount(orderRequest.getAmount().replace("kg",""));
                             if(!orderRequest.getStatus().equalsIgnoreCase("Cancel"))
                                 list.add(orderRequest);
                         }
