@@ -2,27 +2,26 @@ package com.androlord.farmerapp;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.core.app.ActivityOptionsCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.Manifest;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.location.Location;
+import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.androlord.farmerapp.Activities.AddProduct;
 import com.androlord.farmerapp.Activities.LoginActivity;
@@ -38,11 +37,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.Serializable;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements FarmersListAdapter.ClickHandler {
@@ -53,7 +47,9 @@ public class MainActivity extends AppCompatActivity implements FarmersListAdapte
     RecyclerView myProductList;
     ArrayList<Products> list;
     FarmersListAdapter adapter;
-    
+    LocationManager locationManager;
+    LocationListener locationListener;
+
 
 
     @Override
@@ -78,15 +74,82 @@ public class MainActivity extends AppCompatActivity implements FarmersListAdapte
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         init();
-        try {
-            fetch();
-        }catch (Exception e){
-            Log.e("Error", "onCreate: "+e.getMessage());
-        }
+
+        setListener();
+
+        check();
 
         fetch();
 
 
+    }
+
+    private void setListener() {
+        addProduct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, AddProduct.class));
+            }
+        });
+        locationListener=new LocationListener() {
+            @Override
+            public void onLocationChanged(Location location) {
+
+            }
+
+            @Override
+            public void onStatusChanged(String s, int i, Bundle bundle) {
+
+            }
+
+            @Override
+            public void onProviderEnabled(String s) {
+
+            }
+
+            @Override
+            public void onProviderDisabled(String s) {
+
+            }
+        };
+    }
+
+    private void check() {
+        if(getIntent().hasExtra("Farmer")) {
+            Farmer farmer = (Farmer) getIntent().getSerializableExtra("Farmer");
+            reference.child("Farmers").child(farmer.getPhoneNumber()).setValue(farmer);
+            setLocation();
+        }
+
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                return;
+            }
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
+            Location lastKnownLocation=locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            reference.child("Farmers").child(FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber()).child("address").setValue(lastKnownLocation.getLatitude()+" "+lastKnownLocation.getLongitude());
+        }
+    }
+
+    private void setLocation() {
+        locationManager= (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)!= PackageManager.PERMISSION_GRANTED)
+        {
+            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},1);
+            return;
+        }
+        Location lastKnownLocation=locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
+        reference.child("Farmers").child(FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber()).child("address").setValue(lastKnownLocation.getLatitude()+" "+lastKnownLocation.getLongitude());
     }
 
     private void fetch() {
@@ -97,10 +160,8 @@ public class MainActivity extends AppCompatActivity implements FarmersListAdapte
                 for (DataSnapshot dataSnapshot1:dataSnapshot.getChildren()){
                     Products products=(Products) dataSnapshot1.getValue(Products.class);
                     products.setKey(dataSnapshot1.getKey());
-                    Log.d("ak47", "onDataChange: "+products.getKey());
                     if(mAuth.getCurrentUser()!=null&&products.getPhoneNo().equalsIgnoreCase(mAuth.getCurrentUser().getPhoneNumber())) {
                         list.add(products);
-                        Log.d("ak47", "onDataChange: ");
                     }
                 }
                 adapter.notifyDataSetChanged();
@@ -115,7 +176,6 @@ public class MainActivity extends AppCompatActivity implements FarmersListAdapte
     }
 
     private void init() {
-        String TAG="infoAuth";
         list=new ArrayList<Products>();
         mAuth=FirebaseAuth.getInstance();
         database=FirebaseDatabase.getInstance();
@@ -129,16 +189,6 @@ public class MainActivity extends AppCompatActivity implements FarmersListAdapte
         myProductList.setAdapter(adapter);
 
 
-        addProduct.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, AddProduct.class));
-            }
-        });
-        if(getIntent().hasExtra("Farmer")) {
-            Farmer farmer = (Farmer) getIntent().getSerializableExtra("Farmer");
-            reference.child("Farmers").child(farmer.getPhoneNumber()).setValue(farmer);
-        }
 
 
     }
@@ -149,7 +199,7 @@ public class MainActivity extends AppCompatActivity implements FarmersListAdapte
         intent.putExtra("item",list.get(position));
         ActivityOptionsCompat options=ActivityOptionsCompat.makeSceneTransitionAnimation(this,imageView, ViewCompat.getTransitionName(imageView));
         startActivity(intent, options.toBundle());
-        //Toast.makeText(this,list.get(position).getKey()+" ",Toast.LENGTH_LONG).show();
+
     }
 
 

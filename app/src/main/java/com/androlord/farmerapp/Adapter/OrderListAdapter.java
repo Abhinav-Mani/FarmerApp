@@ -41,7 +41,7 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.MyVi
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
         holder.product.setText ("Price:"+"₹"+list.get(position).getProductPrice());
         holder.delivery.setText("Delivery Price:"+"₹"+list.get(position).getDeliverPrice());
         if(list.get(position).getDeliverPrice().equalsIgnoreCase("N/A"))
@@ -50,6 +50,8 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.MyVi
         if(!list.get(position).getStatus().equalsIgnoreCase("Pending..."))
         {
             holder.linearLayout.setBackgroundColor(Color.GREEN);
+            holder.accept.setEnabled(false);
+            holder.decline.setEnabled(false);
         }
         holder.call.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,12 +63,14 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.MyVi
             @Override
             public void onClick(View view) {
                 clickHandler.accept(position);
+
             }
         });
         holder.decline.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 clickHandler.decline(position);
+
             }
         });
     }

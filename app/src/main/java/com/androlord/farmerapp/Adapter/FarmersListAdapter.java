@@ -67,7 +67,6 @@ public class FarmersListAdapter extends RecyclerView.Adapter<FarmersListAdapter.
 
     @Override
     public int getItemCount() {
-        Log.d("ak47", "getItemCount: "+list.size());
         return list.size();
     }
 

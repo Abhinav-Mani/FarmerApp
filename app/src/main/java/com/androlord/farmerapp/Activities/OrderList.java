@@ -1,10 +1,12 @@
 package com.androlord.farmerapp.Activities;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.androlord.farmerapp.Adapter.OrderListAdapter;
+import com.androlord.farmerapp.Fragments.EditProductDialog;
 import com.androlord.farmerapp.Models.OrderRequest;
 import com.androlord.farmerapp.Models.Products;
 import com.androlord.farmerapp.R;
@@ -31,7 +34,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class OrderList extends AppCompatActivity implements OrderListAdapter.ClickHandler, View.OnClickListener {
+public class OrderList extends AppCompatActivity implements OrderListAdapter.ClickHandler, View.OnClickListener, EditProductDialog.DialogListener{
     RecyclerView recyclerView;
     OrderListAdapter adapter;
     ArrayList<OrderRequest> list;
@@ -160,7 +163,8 @@ public class OrderList extends AppCompatActivity implements OrderListAdapter.Cli
         {
             mRef.child("Requests").child(id).child(orderRequest.getKey()).child("status").setValue("Out For Delivery");
         }
-
+        product.setQuality(String.valueOf(rem));
+        setData();
         mRef.child("Products").child(id).child("quality").setValue(String.valueOf(rem));
     }
 
@@ -177,6 +181,7 @@ public class OrderList extends AppCompatActivity implements OrderListAdapter.Cli
         }
         if(view==remove){
             final int[] count = {list.size()};
+
             for (OrderRequest orderRequest:list)
             {
                 mRef.child("Requests").child(id).child(orderRequest.getKey()).child("status").setValue("Out of Stock").addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -185,20 +190,48 @@ public class OrderList extends AppCompatActivity implements OrderListAdapter.Cli
                         count[0]--;
                         if(count[0]==0)
                         {
-                            mRef.child("Products").child(id).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void aVoid) {
-                                    Toast.makeText(OrderList.this,"Product Removed",Toast.LENGTH_LONG).show();
-                                    finish();
-                                }
-                            });
+                            removeProduct();
                         }
                     }
                 });
             }
+            if(list.size()==0)
+            {
+                removeProduct();
+            }
             Toast.makeText(OrderList.this,"Remove",Toast.LENGTH_LONG).show();
         }else if(view==edit){
+            openDialog();
             Toast.makeText(OrderList.this,"Edit",Toast.LENGTH_LONG).show();
         }
+    }
+
+    private void openDialog() {
+        EditProductDialog editProductDialog=new EditProductDialog();
+        editProductDialog.show(getSupportFragmentManager(),"Edit Product Dialog");
+
+    }
+
+    private void removeProduct() {
+        mRef.child("Products").child(id).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Toast.makeText(OrderList.this,"Product Removed",Toast.LENGTH_LONG).show();
+                finish();
+            }
+        });
+    }
+
+    @Override
+    public void applyEdits(String quantity, String price, String deliverPrice) {
+        product.setQuality(quantity);
+        product.setPrice(price);
+        product.setDelivery(deliverPrice);
+        mRef.child("Products").child(id).setValue(product).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                setData();
+            }
+        });
     }
 }

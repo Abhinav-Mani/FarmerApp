@@ -6,6 +6,10 @@ public class Farmer implements Serializable {
     String PhoneNumber;
     String Name;
     String Address;
+
+    public Farmer() {
+    }
+
     public Farmer(String phoneNumber, String name, String address) {
         PhoneNumber = phoneNumber;
         Name = name;

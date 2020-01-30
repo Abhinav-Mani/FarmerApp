@@ -1,5 +1,6 @@
 package com.androlord.farmerapp.Activities;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
@@ -19,12 +20,17 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import com.androlord.farmerapp.Models.Farmer;
 import com.androlord.farmerapp.Models.Products;
 import com.androlord.farmerapp.R;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -40,6 +46,7 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
     private StorageReference mStorageRef;
     DatabaseReference mref;
     String ProductName,Price,Quantity,deliveyCharge="N/A",DeliverMode,ImageUrl,PhoneNo,ModeOFContact;
+    Farmer farmer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +54,23 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
         setContentView(R.layout.activity_add_product);
         init();
 
+        fetch();
+
         setListners();
+    }
+
+    private void fetch() {
+        FirebaseDatabase.getInstance().getReference().child("Farmers").child(FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                farmer=(Farmer) dataSnapshot.getValue(Farmer.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     private void setListners() {
@@ -140,6 +163,10 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
             val=false;
             Toast.makeText(this,"Must set the deliver Charge",Toast.LENGTH_LONG).show();
         }
+        if(farmer==null) {
+            val=false;
+            Toast.makeText(this,"Connection Failed!!!",Toast.LENGTH_LONG).show();
+        }
 
         return val;
     }
@@ -152,7 +179,7 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
         else
             deliveyCharge="N/A";
         PhoneNo=FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber();
-        final Products products=new Products(ProductName,Price,"",Quantity,deliveyCharge,PhoneNo,ModeOFContact);
+        final Products products=new Products(ProductName,Price,farmer.getAddress(),Quantity,deliveyCharge,PhoneNo,ModeOFContact);
         if(clickedImage==0){
             push(products);
         }
@@ -185,7 +212,6 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
         Price = ProductName;
         ProductName = getResources().getStringArray(R.array.Products)[i];
         ModeOFContact = getResources().getStringArray(R.array.contactMode)[i];
-        Log.d("ak47", "onItemSelected: "+i+" "+ModeOFContact);
 
     }
 
