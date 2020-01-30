@@ -14,10 +14,12 @@
            android:id="@+id/cardview1"
            android:layout_margin="20dp"
            android:layout_width="match_parent"
-           android:layout_height="150dp">
+           android:layout_height="wrap_content">
            <ImageView
+               android:background="@drawable/recatngular_border"
+               android:layout_margin="10dp"
                android:layout_width="match_parent"
-               android:layout_height="200dp"
+               android:layout_height="150dp"
                android:id="@+id/productImage"
                android:transitionName="Windows"/>
        </androidx.cardview.widget.CardView>
@@ -29,13 +31,15 @@
             android:id="@+id/cardview2"
             android:layout_height="wrap_content">
             <RelativeLayout
+                android:layout_margin="5dp"
+                android:background="@drawable/recatngular_border"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_alignParentBottom="true">
             <TextView
                 android:text="Prodct Name"
-                android:layout_margin="5dp"
+                android:layout_margin="7dp"
                 android:layout_width="match_parent"
                 android:id="@+id/ProductName"
                 android:layout_height="wrap_content"/>
@@ -43,12 +47,12 @@
                 android:layout_width="match_parent"
                 android:id="@+id/ProductPrice"
                 android:text="Price"
-                android:layout_margin="5dp"
+                android:layout_margin="7dp"
                 android:layout_below="@+id/ProductName"
                 android:layout_height="wrap_content"/>
             <TextView
                 android:text="Amount"
-                android:layout_margin="5dp"
+                android:layout_margin="7dp"
                 android:layout_width="match_parent"
                 android:id="@+id/ProductAmount"
                 android:layout_below="@+id/ProductPrice"
