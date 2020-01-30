@@ -114,6 +114,7 @@
                     android:layout_height="wrap_content"
                     android:hint="Service Charge"
                     android:visibility="gone"
+                    android:inputType="number"
                     android:id="@+id/productDeliveryCharge"/>
                 <Spinner
                     android:layout_below="@+id/productDeliveryCharge"

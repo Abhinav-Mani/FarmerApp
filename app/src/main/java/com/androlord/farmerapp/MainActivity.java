@@ -127,13 +127,20 @@ public class MainActivity extends AppCompatActivity implements FarmersListAdapte
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        Log.e("ak47", "onRequestPermissionsResult: 1");
         if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            Log.e("ak47", "onRequestPermissionsResult: 2");
             if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                Log.e("ak47", "onRequestPermissionsResult: 3");
                 return;
             }
+            Log.e("ak47", "onRequestPermissionsResult: 4");
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+            Log.e("ak47", "onRequestPermissionsResult: 5");
             locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
+            Log.e("ak47", "onRequestPermissionsResult: 6");
             Location lastKnownLocation=locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            Log.e("ak47", "onRequestPermissionsResult: 7");
             reference.child("Farmers").child(FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber()).child("address").setValue(lastKnownLocation.getLatitude()+" "+lastKnownLocation.getLongitude());
         }
     }

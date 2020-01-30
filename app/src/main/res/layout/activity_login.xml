@@ -24,11 +24,13 @@
 
            <EditText
                android:id="@+id/name"
+               android:inputType="textPersonName"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:hint="Name" />
            <EditText
                android:layout_below="@+id/name"
+               android:inputType="textPostalAddress"
                android:id="@+id/address"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
@@ -37,6 +39,7 @@
            <EditText
                android:layout_below="@+id/address"
                android:id="@+id/phoneno"
+               android:inputType="phone"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:hint="Phone No" />
