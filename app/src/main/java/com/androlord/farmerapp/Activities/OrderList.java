@@ -165,6 +165,7 @@ public class OrderList extends AppCompatActivity implements OrderListAdapter.Cli
         }
         product.setQuality(String.valueOf(rem));
         setData();
+        mRef.child("Market").child(product.getProductName()).child(String.valueOf(System.currentTimeMillis())).setValue(orderRequest.getProductPrice());
         mRef.child("Products").child(id).child("quality").setValue(String.valueOf(rem));
     }
 

@@ -90,6 +90,7 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
         imageView.setOnClickListener(this);
         submit.setOnClickListener(this);
         mode.setOnItemSelectedListener(this);
+        product.setOnItemSelectedListener(this);
     }
 
     @Override
@@ -209,9 +210,11 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
-        Price = ProductName;
-        ProductName = getResources().getStringArray(R.array.Products)[i];
-        ModeOFContact = getResources().getStringArray(R.array.contactMode)[i];
+        if(adapterView==product) {
+            ProductName = getResources().getStringArray(R.array.Products)[i];
+        }else if(adapterView==mode) {
+            ModeOFContact = getResources().getStringArray(R.array.contactMode)[i];
+        }
 
     }
 
