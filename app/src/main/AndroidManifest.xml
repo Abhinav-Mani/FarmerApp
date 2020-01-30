@@ -22,10 +22,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <service
-            android:name=".AppLocationService"
-            android:permission="android.permission.ACCESS_FINE_LOCATION">
-        </service>
     </application>
 
 </manifest>

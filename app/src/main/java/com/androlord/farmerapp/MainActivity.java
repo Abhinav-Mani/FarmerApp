@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements FarmersListAdapte
     RecyclerView myProductList;
     ArrayList<Products> list;
     FarmersListAdapter adapter;
-    AppLocationService appLocationService;
+    
 
 
     @Override
