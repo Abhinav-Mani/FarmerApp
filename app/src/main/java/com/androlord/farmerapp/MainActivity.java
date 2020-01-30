@@ -85,46 +85,8 @@ public class MainActivity extends AppCompatActivity implements FarmersListAdapte
         }
 
         fetch();
-        appLocationService =new AppLocationService(this);
-        Location location = appLocationService
-                .getLocation(LocationManager.GPS_PROVIDER);
 
-        //you can hard-code the lat & long if you have issues with getting it
-        //remove the below if-condition and use the following couple of lines
-        //double latitude = 37.422005;
-        //double longitude = -122.084095
 
-        if (location != null) {
-            double latitude = location.getLatitude();
-            double longitude = location.getLongitude();
-            LocationAddress locationAddress = new LocationAddress();
-            locationAddress.getAddressFromLocation(latitude, longitude,
-                    getApplicationContext(), new GeocoderHandler());
-        } else {
-            showSettingsAlert();
-        }
-
-    }
-    public void showSettingsAlert() {
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(
-                MainActivity.this);
-        alertDialog.setTitle("SETTINGS");
-        alertDialog.setMessage("Enable Location Provider! Go to settings menu?");
-        alertDialog.setPositiveButton("Settings",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent(
-                                Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                        MainActivity.this.startActivity(intent);
-                    }
-                });
-        alertDialog.setNegativeButton("Cancel",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
-        alertDialog.show();
     }
 
     private void fetch() {
@@ -190,32 +152,6 @@ public class MainActivity extends AppCompatActivity implements FarmersListAdapte
         //Toast.makeText(this,list.get(position).getKey()+" ",Toast.LENGTH_LONG).show();
     }
 
-    private class GeocoderHandler extends Handler {
-        @Override
-        public void handleMessage(Message message) {
-            String locationAddress;
-            switch (message.what) {
-                case 1:
-                    Bundle bundle = message.getData();
-                    locationAddress = bundle.getString("address");
-                    break;
-                default:
-                    locationAddress = null;
-            }
 
-            String FILE_NAME = "Local Address";
-            FileOutputStream fileOutputStream =null;
-            try {
-                fileOutputStream = openFileOutput(FILE_NAME, MODE_PRIVATE);
-                fileOutputStream.write(locationAddress.getBytes());
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-
-        }
-    }
+}
 

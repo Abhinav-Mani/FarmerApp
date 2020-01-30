@@ -44,7 +44,12 @@ public class FarmersListAdapter extends RecyclerView.Adapter<FarmersListAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
-        holder.textView.setText(list.get(position).getProductName());
+        holder.productName.setText(list.get(position).getProductName());
+        holder.price.setText("₹"+list.get(position).getPrice());
+        holder.quantity.setText(list.get(position).getQuality()+"Kg");
+        holder.deliveryCharge.setText(list.get(position).getDelivery());
+        if(!list.get(position).getDelivery().equalsIgnoreCase("N/A"))
+        holder.deliveryCharge.setText("₹"+list.get(position).getDelivery());
         Glide.with(context).asBitmap().
                 load(list.get(position).getImg()).
                 fitCenter().
@@ -69,12 +74,16 @@ public class FarmersListAdapter extends RecyclerView.Adapter<FarmersListAdapter.
     public static class  MyViewHolder extends RecyclerView.ViewHolder {
         CardView item;
         ImageView imageView;
-        TextView textView;
+        TextView productName,price,quantity,deliveryCharge;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView=itemView.findViewById(R.id.productImageSingle);
-            textView=itemView.findViewById(R.id.productNameSingle);
+            productName=itemView.findViewById(R.id.productNameSingle);
             item=itemView.findViewById(R.id.SingleItem);
+            price=itemView.findViewById(R.id.price);
+            quantity=itemView.findViewById(R.id.quantity);
+            deliveryCharge=itemView.findViewById(R.id.deliveryCharge);
         }
+
     }
 }

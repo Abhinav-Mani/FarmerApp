@@ -42,10 +42,12 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.MyVi
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
-        holder.product.setText(list.get(position).getProductPrice());
-        holder.delivery.setText(list.get(position).getDeliverPrice());
-        holder.quantity.setText(list.get(position).getAmount());
-        if(list.get(position).getStatus().equalsIgnoreCase("Accepted"))
+        holder.product.setText ("Price:"+"₹"+list.get(position).getProductPrice());
+        holder.delivery.setText("Delivery Price:"+"₹"+list.get(position).getDeliverPrice());
+        if(list.get(position).getDeliverPrice().equalsIgnoreCase("N/A"))
+        holder.delivery.setText("Delivery Price:"+list.get(position).getDeliverPrice());
+        holder.quantity.setText("Quantity:"+list.get(position).getAmount()+"Kg");
+        if(!list.get(position).getStatus().equalsIgnoreCase("Pending..."))
         {
             holder.linearLayout.setBackgroundColor(Color.GREEN);
         }

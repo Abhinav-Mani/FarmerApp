@@ -98,7 +98,13 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
     }
     public void push(Products p)
     {
-        mref.push().setValue(p);
+        mref.push().setValue(p).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Toast.makeText(AddProduct.this,"Product Added",Toast.LENGTH_LONG).show();
+                finish();
+            }
+        });
     }
 
     @Override
@@ -139,6 +145,7 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
     }
 
     private void upload() {
+        Price = price.getText().toString().trim();
         Quantity=quantity.getText().toString().trim();
         if(isSelfDelivery.isChecked())
             deliveyCharge=DeliveryCharge.getText().toString().trim();
