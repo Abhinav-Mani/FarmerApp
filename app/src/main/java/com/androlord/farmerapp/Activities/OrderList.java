@@ -169,11 +169,13 @@ public class OrderList extends AppCompatActivity implements OrderListAdapter.Cli
         setData();
         mRef.child("Market").child(product.getProductName()).child(String.valueOf(System.currentTimeMillis())).setValue(orderRequest.getProductPrice());
         mRef.child("Products").child(id).child("quality").setValue(String.valueOf(rem));
+        mRef.child("Products").child(id).child("pendingRequests").setValue(product.getPendingRequests()-1);
     }
 
     @Override
     public void decline(int position) {
         mRef.child("Requests").child(id).child(list.get(position).getKey()).child("status").setValue("Cancel");
+        mRef.child("Products").child(id).child("pendingRequests").setValue(product.getPendingRequests()-1);
     }
 
     @Override

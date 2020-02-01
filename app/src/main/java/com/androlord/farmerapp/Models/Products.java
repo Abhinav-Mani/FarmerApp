@@ -1,7 +1,5 @@
 package com.androlord.farmerapp.Models;
 
-import android.widget.ImageView;
-
 import java.io.Serializable;
 
 public class Products implements Serializable {
@@ -13,6 +11,15 @@ public class Products implements Serializable {
     String PhoneNo;
     String Contact;
     String img;
+    int PendingRequests;
+
+    public int getPendingRequests() {
+        return PendingRequests;
+    }
+
+    public void setPendingRequests(int pendingRequests) {
+        PendingRequests = pendingRequests;
+    }
 
     public String getKey() {
         return key;
@@ -27,7 +34,7 @@ public class Products implements Serializable {
     public Products() {
     }
 
-    public Products(String productName, String price, String location, String quality, String delivery, String phoneNo, String contact, String img) {
+    public Products(String productName, String price, String location, String quality, String delivery, String phoneNo, String contact, String img,int PendingRequests) {
         ProductName = productName;
         Price = price;
         Location = location;
@@ -36,6 +43,7 @@ public class Products implements Serializable {
         PhoneNo = phoneNo;
         Contact = contact;
         this.img = img;
+        this.PendingRequests=PendingRequests;
     }
 
     public Products(String productName, String price, String location, String quality, String delivery, String phoneNo, String contact) {

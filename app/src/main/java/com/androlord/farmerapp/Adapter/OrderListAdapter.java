@@ -93,6 +93,7 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.MyVi
             accept=itemView.findViewById(R.id.acceptCustomer);
             decline=itemView.findViewById(R.id.declineCustomer);
             linearLayout=itemView.findViewById(R.id.orderItem);
+
         }
     }
 }

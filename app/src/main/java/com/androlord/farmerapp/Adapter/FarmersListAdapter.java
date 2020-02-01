@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -44,10 +45,17 @@ public class FarmersListAdapter extends RecyclerView.Adapter<FarmersListAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
-        holder.productName.setText(list.get(position).getProductName());
-        holder.price.setText("₹"+list.get(position).getPrice());
-        holder.quantity.setText(list.get(position).getQuality()+"Kg");
-        holder.deliveryCharge.setText(list.get(position).getDelivery());
+        Products products=list.get(position);
+        holder.productName.setText(products.getProductName());
+        holder.price.setText("₹"+products.getPrice());
+        holder.quantity.setText(products.getQuality()+"Kg");
+        holder.deliveryCharge.setText(products.getDelivery());
+        holder.requestCountHolder.setVisibility(View.GONE);
+
+        if(products.getPendingRequests()!=0){
+            holder.requestCountHolder.setVisibility(View.VISIBLE);
+            holder.pendingOrders.setText(products.getPendingRequests()+"");
+        }
         if(!list.get(position).getDelivery().equalsIgnoreCase("N/A"))
         holder.deliveryCharge.setText("₹"+list.get(position).getDelivery());
         Glide.with(context).asBitmap().
@@ -73,7 +81,8 @@ public class FarmersListAdapter extends RecyclerView.Adapter<FarmersListAdapter.
     public static class  MyViewHolder extends RecyclerView.ViewHolder {
         CardView item;
         ImageView imageView;
-        TextView productName,price,quantity,deliveryCharge;
+        TextView productName,price,quantity,deliveryCharge,pendingOrders;
+        RelativeLayout requestCountHolder;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView=itemView.findViewById(R.id.productImageSingle);
@@ -82,6 +91,8 @@ public class FarmersListAdapter extends RecyclerView.Adapter<FarmersListAdapter.
             price=itemView.findViewById(R.id.price);
             quantity=itemView.findViewById(R.id.quantity);
             deliveryCharge=itemView.findViewById(R.id.deliveryCharge);
+            pendingOrders=itemView.findViewById(R.id.pendingRequests);
+            requestCountHolder=itemView.findViewById(R.id.pendingRequestsCountHolder);
         }
 
     }

@@ -181,6 +181,7 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
             deliveyCharge="N/A";
         PhoneNo=FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber();
         final Products products=new Products(ProductName,Price,farmer.getAddress(),Quantity,deliveyCharge,PhoneNo,ModeOFContact);
+        products.setPendingRequests(0);
         if(clickedImage==0){
             push(products);
         }
