@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.androlord.farmerapp.Activities.OrderList;
 import com.androlord.farmerapp.Models.OrderRequest;
+import com.androlord.farmerapp.Models.Products;
 import com.androlord.farmerapp.R;
 
 import java.util.ArrayList;
@@ -42,6 +43,7 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.MyVi
 
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
+        OrderRequest orderRequest=list.get(position);
         holder.product.setText ("Price:"+"₹"+list.get(position).getProductPrice());
         holder.delivery.setText("Delivery Price:"+"₹"+list.get(position).getDeliverPrice());
         if(list.get(position).getDeliverPrice().equalsIgnoreCase("N/A"))

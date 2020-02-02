@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -73,6 +74,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
     private void sendVerificationCode(String number){
+        Log.d("ak47", "sendVerificationCode: ");
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
                 number,             // Phone number to verify
                 60,                 // Timeout duration
