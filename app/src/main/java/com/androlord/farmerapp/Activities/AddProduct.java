@@ -3,6 +3,8 @@ package com.androlord.farmerapp.Activities;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -18,6 +20,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -47,11 +50,17 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
     DatabaseReference mref;
     String ProductName,Price,Quantity,deliveyCharge="N/A",DeliverMode,ImageUrl,PhoneNo,ModeOFContact;
     Farmer farmer;
+    ProgressDialog mProgress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_product);
+
+        mProgress = new ProgressDialog(this);
+        mProgress.setTitle("Uploading.....");
+        mProgress.setMessage("Please wait.");
+        mProgress.setIndeterminate(true);
         init();
 
         fetch();
@@ -142,6 +151,7 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
             }
         }else if(view==submit){
             if( validate()){
+                mProgress.show();
                 upload();
             }
         }
@@ -200,6 +210,7 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
                             ImageUrl=String.valueOf(uri);
                             products.setImg(ImageUrl);
                             push(products);
+                            mProgress.dismiss();
                         }
                     });
                 }

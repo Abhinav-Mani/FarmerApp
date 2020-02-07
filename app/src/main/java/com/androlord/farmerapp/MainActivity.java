@@ -155,7 +155,6 @@ public class MainActivity extends AppCompatActivity implements FarmersListAdapte
             return;
         }
         Location lastKnownLocation=locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
         reference.child("Farmers").child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber())).child("address").setValue(lastKnownLocation.getLatitude()+" "+lastKnownLocation.getLongitude());
@@ -175,45 +174,36 @@ public class MainActivity extends AppCompatActivity implements FarmersListAdapte
                     }
                 }
                 adapter.notifyDataSetChanged();
-
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
             }
         });
     }
 
     private void init() {
-        SetPersistence persistence=new SetPersistence();
+        try{
+            SetPersistence persistence=new SetPersistence();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         list=new ArrayList<Products>();
         mAuth=FirebaseAuth.getInstance();
         database=FirebaseDatabase.getInstance();
         reference=database.getReference();
         addProduct=findViewById(R.id.addItem);
-
-
         myProductList=findViewById(R.id.FarmersProductList);
         myProductList.setLayoutManager(new LinearLayoutManager(this));
         adapter=new FarmersListAdapter(list,this);
         myProductList.setAdapter(adapter);
-
-
-
-
-
     }
-
     @Override
     public void ItemSelected(int position, ImageView imageView) {
         Intent intent=new Intent(this, OrderList.class);
         intent.putExtra("item",list.get(position));
         ActivityOptionsCompat options=ActivityOptionsCompat.makeSceneTransitionAnimation(this,imageView, ViewCompat.getTransitionName(imageView));
         startActivity(intent, options.toBundle());
-
     }
-
-
 }
 
