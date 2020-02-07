@@ -29,6 +29,7 @@ import com.androlord.farmerapp.Activities.OrderList;
 import com.androlord.farmerapp.Adapter.FarmersListAdapter;
 import com.androlord.farmerapp.Models.Farmer;
 import com.androlord.farmerapp.Models.Products;
+import com.androlord.farmerapp.Utils.SetPersistence;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -38,6 +39,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity implements FarmersListAdapter.ClickHandler {
     FirebaseAuth mAuth;
@@ -156,10 +158,11 @@ public class MainActivity extends AppCompatActivity implements FarmersListAdapte
 
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
-        reference.child("Farmers").child(FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber()).child("address").setValue(lastKnownLocation.getLatitude()+" "+lastKnownLocation.getLongitude());
+        reference.child("Farmers").child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber())).child("address").setValue(lastKnownLocation.getLatitude()+" "+lastKnownLocation.getLongitude());
     }
 
     private void fetch() {
+
         reference.child("Products").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -183,6 +186,7 @@ public class MainActivity extends AppCompatActivity implements FarmersListAdapte
     }
 
     private void init() {
+        SetPersistence persistence=new SetPersistence();
         list=new ArrayList<Products>();
         mAuth=FirebaseAuth.getInstance();
         database=FirebaseDatabase.getInstance();
@@ -194,6 +198,7 @@ public class MainActivity extends AppCompatActivity implements FarmersListAdapte
         myProductList.setLayoutManager(new LinearLayoutManager(this));
         adapter=new FarmersListAdapter(list,this);
         myProductList.setAdapter(adapter);
+
 
 
 
