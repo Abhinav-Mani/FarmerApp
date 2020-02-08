@@ -46,7 +46,7 @@
                     android:layout_height="wrap_content">
                     <TextView
                         android:id="@+id/text1"
-                        android:text="Product Name:"
+                        android:text="@string/product_name"
                         android:textColor="#000000"
                         android:textStyle="bold"
                         android:layout_width="wrap_content"
@@ -68,7 +68,7 @@
                     android:layout_height="wrap_content">
                     <TextView
                         android:id="@+id/text2"
-                        android:text="Price :"
+                        android:text="@string/product_price"
                         android:textColor="#000000"
                         android:textStyle="bold"
                         android:layout_width="wrap_content"
@@ -90,7 +90,7 @@
                     android:layout_height="wrap_content">
                     <TextView
                         android:id="@+id/text3"
-                        android:text="Quantity :"
+                        android:text="@string/product_quantity"
                         android:textColor="#000000"
                         android:textStyle="bold"
                         android:layout_width="wrap_content"
@@ -112,7 +112,7 @@
                     android:layout_height="wrap_content">
                     <TextView
                         android:id="@+id/text4"
-                        android:text="Delivery Charge:"
+                        android:text="@string/product_delivery_charge"
                         android:textColor="#000000"
                         android:textStyle="bold"
                         android:layout_width="wrap_content"

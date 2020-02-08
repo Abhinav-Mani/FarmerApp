@@ -2,6 +2,10 @@
 <resources>
     <string name="settings">समायोजन</string>
     <string name="language">भाषा</string>
+    <string name="product_name">उत्पाद का नाम:</string>
+    <string name="product_quantity">मात्रा :</string>
+    <string name="product_price">कीमत :</string>
+    <string name="product_delivery_charge">डिलीवरी चार्ज:</string>
     <string-array name="Products">
         <item>आलू</item>
         <item>पालक</item>

@@ -16,6 +16,7 @@
         android:id="@+id/productAmountEdit"
         android:inputType="number"
         android:hint="Product Amount"/>
+
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

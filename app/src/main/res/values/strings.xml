@@ -24,43 +24,13 @@
     <string name="device" translatable="false">Device</string>
     <string name="cancel" translatable="false">Cancel</string>
     <string name="settings">Settings</string>
+    <string name="product_name">Product Name:</string>
+    <string name="product_price">Price :</string>
+    <string name="product_quantity">Quantity :</string>
+    <string name="product_delivery_charge">Delivery Charge:</string>
     <string-array name="languages" translatable="false">
         <item>en-US</item>
-        <item>az</item>
         <item>bn</item>
-        <item>de</item>
-        <item>el</item>
-        <item>es</item>
-        <item>fr</item>
-        <item>gd</item>
         <item>hi</item>
-        <item>hu</item>
-        <item>id</item>
-        <item>it</item>
-        <item>ja</item>
-        <item>ko</item>
-        <item>nb</item>
-        <item>nl</item>
-        <item>pl</item>
-        <item>ru</item>
-        <item>sv</item>
-        <item>th</item>
-        <item>uz</item>
-        <item>zh-CN</item>
-        <item>zh-TW</item>
-        <item>zh-HK</item>
-        <item>en-GB</item>
-        <item>tr</item>
-        <item>eu</item>
-        <item>he</item>
-        <item>pt-BR</item>
-        <item>ar</item>
-        <item>ro</item>
-        <item>mk</item>
-        <item>en-AU</item>
-        <item>sr</item>
-        <item>sk</item>
-        <item>cy</item>
-        <item>da</item>
     </string-array>
 </resources>

@@ -2,6 +2,10 @@
 <resources>
     <string name="settings">সেটিংস</string>
     <string name="language">ভাষা</string>
+    <string name="product_name">পণ্যের নাম:</string>
+    <string name="product_quantity">পরিমাণ :</string>
+    <string name="product_price">মূল্য :</string>
+    <string name="product_delivery_charge">ডেলিভারি চার্জ:</string>
     <string-array name="Products">
         <item>আলু</item>
         <item>শাক</item>
