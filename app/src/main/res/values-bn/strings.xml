@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="settings">সেটিংস</string>
+    <string name="language">ভাষা</string>
+    <string-array name="Products">
+        <item>আলু</item>
+        <item>শাক</item>
+        <item>পেঁয়াজ</item>
+        <item>আম</item>
+        <item>লেটুস</item>
+        <item>টমেটো</item>
+        <item>কমলালেবু</item>
+        <item>লেডি ফিঙ্গার</item>
+        <item>তারিখ</item>
+        <item>অন্যান্য</item>
+    </string-array>
+</resources>

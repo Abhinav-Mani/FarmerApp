@@ -20,6 +20,8 @@ import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -27,6 +29,8 @@ import com.androlord.farmerapp.Activities.AddProduct;
 import com.androlord.farmerapp.Activities.LoginActivity;
 import com.androlord.farmerapp.Activities.OrderList;
 import com.androlord.farmerapp.Adapter.FarmersListAdapter;
+import com.androlord.farmerapp.LanguageHelper.SettingsActivity;
+import com.androlord.farmerapp.LanguageHelper.SettingsFragment;
 import com.androlord.farmerapp.Models.Farmer;
 import com.androlord.farmerapp.Models.Products;
 import com.androlord.farmerapp.Utils.SetPersistence;
@@ -205,5 +209,36 @@ public class MainActivity extends AppCompatActivity implements FarmersListAdapte
         ActivityOptionsCompat options=ActivityOptionsCompat.makeSceneTransitionAnimation(this,imageView, ViewCompat.getTransitionName(imageView));
         startActivity(intent, options.toBundle());
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.settings:
+                startActivityForResult(new Intent(this, SettingsActivity.class), 1000);
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.d("ActivityResult", "Request code is " + requestCode + ", result code is " + resultCode);
+        switch (requestCode) {
+            case 1000:
+                if (resultCode == SettingsFragment.LANGUAGE_CHANGED) {
+                    startActivity(new Intent(this, MainActivity.class));
+                    finish();
+                }
+                break;
+        }
+    }
+
 }
 

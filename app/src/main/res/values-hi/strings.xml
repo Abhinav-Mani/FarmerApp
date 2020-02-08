@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="settings">समायोजन</string>
+    <string name="language">भाषा</string>
+    <string-array name="Products">
+        <item>आलू</item>
+        <item>पालक</item>
+        <item>प्याज</item>
+        <item>आम</item>
+        <item>सलाद</item>
+        <item>टमाटर</item>
+        <item>संतरे</item>
+        <item>भिन्डी</item>
+        <item>खजूर</item>
+        <item>अन्य</item>
+    </string-array>
+</resources>
