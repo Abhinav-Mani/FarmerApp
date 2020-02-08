@@ -223,6 +223,10 @@ public class MainActivity extends AppCompatActivity implements FarmersListAdapte
         switch (id) {
             case R.id.settings:
                 startActivityForResult(new Intent(this, SettingsActivity.class), 1000);
+                break;
+            case R.id.logout:
+                mAuth.signOut();
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
