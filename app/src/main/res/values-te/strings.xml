@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="settings">సెట్టింగులను</string>
+    <string name="language">భాష</string>
+    <string name="product_name">ఉత్పత్తి నామం:</string>
+    <string name="product_quantity">ఉత్పత్తి పరిమాణం :</string>
+    <string name="product_price">ధర :</string>
+    <string name="product_delivery_charge">డెలివరీ ఛార్జ్:</string>
+    <string-array name="Products">
+        <item>బంగాళాదుంప</item>
+        <item>స్పినాచ్</item>
+        <item>ఉల్లిపాయ</item>
+        <item>మామిడి</item>
+        <item>లెటుస్</item>
+        <item>టమోటా</item>
+        <item>నారింజ</item>
+        <item>బెండ కాయ</item>
+        <item>తేదీ</item>
+        <item>ఇతరులు</item>
+    </string-array>
+</resources>

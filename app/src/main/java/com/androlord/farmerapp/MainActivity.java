@@ -168,8 +168,11 @@ public class MainActivity extends AppCompatActivity implements FarmersListAdapte
             locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
 
             Location lastKnownLocation=locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            if(locationManager!=null)
-            reference.child("Farmers").child(FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber()).child("address").setValue(lastKnownLocation.getLatitude()+" "+lastKnownLocation.getLongitude());
+            try{
+            reference.child("Farmers").child(FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber()).child("address").setValue(lastKnownLocation.getLatitude()+" "+lastKnownLocation.getLongitude());}
+            catch (Exception e){
+                reference.child("Farmers").child(FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber()).child("address").setValue("22.77247565"+" "+"86.14975123662");
+            }
         }
     }
 
@@ -183,7 +186,11 @@ public class MainActivity extends AppCompatActivity implements FarmersListAdapte
         Location lastKnownLocation=locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
-        reference.child("Farmers").child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber())).child("address").setValue(lastKnownLocation.getLatitude()+" "+lastKnownLocation.getLongitude());
+        try {
+            reference.child("Farmers").child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber())).child("address").setValue(lastKnownLocation.getLatitude()+" "+lastKnownLocation.getLongitude());
+        }catch (Exception e){
+            reference.child("Farmers").child(FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber()).child("address").setValue("22.77247565"+" "+"86.14975123662");
+        }
     }
 
     private void fetch() {
@@ -244,6 +251,10 @@ public class MainActivity extends AppCompatActivity implements FarmersListAdapte
         switch (id) {
             case R.id.settings:
                 startActivityForResult(new Intent(this, SettingsActivity.class), 1000);
+                break;
+            case R.id.logout:
+                mAuth.signOut();
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
