@@ -4,12 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/greenorganicfarmlogo"
+    android:background="@drawable/block"
     tools:context=".Activities.BlockedUser">
     <TextView
+        android:textColor="#000000"
+        android:textStyle="bold"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:textSize="30sp"
-        android:text="You Are A bloced user Contact Admin"/>
+        android:layout_margin="20dp"
+        android:text="You Are A blocked user.
+         Please contact Admin for further inforation."/>
 
 </LinearLayout>
