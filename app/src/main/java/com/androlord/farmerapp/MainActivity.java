@@ -26,6 +26,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.androlord.farmerapp.Activities.AddProduct;
+import com.androlord.farmerapp.Activities.BlockedUser;
 import com.androlord.farmerapp.Activities.LoginActivity;
 import com.androlord.farmerapp.Activities.OrderList;
 import com.androlord.farmerapp.Adapter.FarmersListAdapter;
@@ -69,7 +70,27 @@ public class MainActivity extends AppCompatActivity implements FarmersListAdapte
                     Intent intent=new Intent(MainActivity.this, LoginActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
+                } else {
+                    reference.child("Farmers").child(FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber()).child("Rejects").addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            Log.d("ak47", "onDataChange: "+dataSnapshot.getValue());
+                            if(dataSnapshot.getValue()==null){
+
+                            }else if((long)dataSnapshot.getValue()>2) {
+                                Intent intent=new Intent(MainActivity.this, BlockedUser.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                startActivity(intent);
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
                 }
+
             }
         });
     }

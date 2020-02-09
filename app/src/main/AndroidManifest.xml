@@ -14,12 +14,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LanguageHelper.SettingsActivity"
-            android:configChanges="locale"></activity>
+        <activity android:name=".Activities.BlockedUser"></activity>
+        <activity
+            android:name=".LanguageHelper.SettingsActivity"
+            android:configChanges="locale" />
         <activity android:name=".Activities.OrderList" />
         <activity android:name=".Activities.AddProduct" />
         <activity android:name=".Activities.LoginActivity" />
-        <activity android:name=".LanguageHelper.MainActivityLauncher"
+        <activity
+            android:name=".LanguageHelper.MainActivityLauncher"
             android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,8 +30,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity">
-        </activity>
+        <activity android:name=".MainActivity"></activity>
     </application>
 
 </manifest>
