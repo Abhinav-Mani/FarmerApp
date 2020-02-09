@@ -14,6 +14,6 @@
         android:textSize="30sp"
         android:layout_margin="20dp"
         android:text="You Are A blocked user.
-         Please contact Admin for further inforation."/>
+         Please contact Admin for further information."/>
 
 </LinearLayout>
